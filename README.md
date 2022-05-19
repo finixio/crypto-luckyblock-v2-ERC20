@@ -175,3 +175,25 @@ function mint(address user, uint256 amount) external onlyMinter minting returns 
 Allows only the `minter` to mint new tokens to the `user` when the `isMinting` status is `true`.
 
 The `mint` function will not allow minting of tokens more than `HARD_CAP` set in during deployment(100 billion).
+
+# Testing
+
+To run the truffle tests on the contracts:
+
+1. Install the required packages.
+
+```
+npm install
+```
+
+2. Start local ganache server.
+
+```
+ganache-cli
+```
+
+3. Run truffle tests
+
+```
+truffle test
+```
