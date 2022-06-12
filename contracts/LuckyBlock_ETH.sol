@@ -127,14 +127,14 @@ contract LuckyBlock_ETH is Context, IERC20, IERC20Metadata, Ownable {
         return true;
     }
 
-    function allowance(address owner, address spender)
+    function allowance(address ownerAddress, address spenderAddress)
         public
         view
         virtual
         override
         returns (uint256)
     {
-        return _allowances[owner][spender];
+        return _allowances[ownerAddress][spenderAddress];
     }
 
     /**
@@ -295,7 +295,7 @@ contract LuckyBlock_ETH is Context, IERC20, IERC20Metadata, Ownable {
     }
 
     /**
-     * @dev Sets `amount` as the allowance of `spender` over the `owner`s tokens.
+     * @dev Sets `amount` as the allowance of `spenderAddress` over the `ownerAddress`s tokens.
      *
      * This is internal function is equivalent to `approve`, and can be used to
      * e.g. set automatic allowances for certain subsystems, etc.
@@ -304,18 +304,24 @@ contract LuckyBlock_ETH is Context, IERC20, IERC20Metadata, Ownable {
      *
      * Requirements:
      *
-     * - `owner` cannot be the zero address.
-     * - `spender` cannot be the zero address.
+     * - `ownerAddress` cannot be the zero address.
+     * - `spenderAddress` cannot be the zero address.
      */
     function _approve(
-        address owner,
-        address spender,
+        address ownerAddress,
+        address spenderAddress,
         uint256 amount
     ) internal virtual {
-        require(owner != address(0), "ERC20: approve from the zero address");
-        require(spender != address(0), "ERC20: approve to the zero address");
+        require(
+            ownerAddress != address(0),
+            "ERC20: approve from the zero address"
+        );
+        require(
+            spenderAddress != address(0),
+            "ERC20: approve to the zero address"
+        );
 
-        _allowances[owner][spender] = amount;
-        emit Approval(owner, spender, amount);
+        _allowances[ownerAddress][spenderAddress] = amount;
+        emit Approval(ownerAddress, spenderAddress, amount);
     }
 }
